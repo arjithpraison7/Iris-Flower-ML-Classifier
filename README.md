@@ -30,17 +30,6 @@ Build a classifier to predict the species of iris flowers based on their petal a
 
 The aim of this project is to predict the species of iris flowers based on their petal and sepal measurements. The Iris dataset contains four features (sepal length, sepal width, petal length, petal width) and one target variable (species label). Each sample is associated with one of three species: setosa, versicolor, or virginica. (Shown in figure)
 
-![*Iris setosa*](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/ef2ad752-12ff-4007-afce-07eadc9854c5/Untitled.png)
-
-*Iris setosa*
-
-![*Iris versicolor*](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/175f9ea5-3f46-4203-be82-b6485cb48c3e/Untitled.png)
-
-*Iris versicolor*
-
-![*Iris Virginca*](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/91b66d47-4cec-4932-9bd3-6db8209d5892/Untitled.png)
-
-*Iris Virginca*
 
 Each sample is represented by its features (numerical measurements) and associated with a target label.
 
@@ -247,9 +236,6 @@ plt.show()
 
 The x-axis represents sepal length and the y-axis represents sepal width. Each data point is colored based on its corresponding species label (setosa, versicolor, virginica).
 
-![Scatter Plot of Iris Dataset](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/d4eeee82-f378-4b73-91bb-4d50aa5c756c/Figure_1.png)
-
-Scatter Plot of Iris Dataset
 
 # Conclusion
 
@@ -275,92 +261,9 @@ We created a scatter plot to visualize the distribution of Iris flower species b
 
 This project demonstrates the entire machine learning workflow, from data preprocessing to model evaluation and visualization. It's important to note that this is just one approach, and further exploration and experimentation could yield even better results or insights.
 
-- Entire Code
-    
-    ```python
-    from sklearn.datasets import load_iris
-    from sklearn.model_selection import train_test_split
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.metrics import classification_report
-    from sklearn.model_selection import GridSearchCV
-    from sklearn.ensemble import RandomForestClassifier
-    import matplotlib.pyplot as plt
-    
-    # Load the dataset
-    iris = load_iris()
-    X = iris.data
-    y = iris.target
-    
-    # Explore the data
-    print("First few rows of X:")
-    print(X[:5])  # Print the first 5 rows
-    
-    print("Basic statistics of X:")
-    print("Mean:", X.mean(axis=0))
-    print("Standard Deviation:", X.std(axis=0))
-    
-    # Split the data into training and testing sets
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-    
-    # Scale the features using StandardScaler
-    scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    X_test_scaled = scaler.transform(X_test)
-    
-    # Classifying the dataset using RandomForestClassifier
-    classifier = RandomForestClassifier()
-    classifier.fit(X_train_scaled, y_train)
-    
-    y_pred = classifier.predict(X_test_scaled)
-    report = classification_report(y_test, y_pred, target_names=iris.target_names)
-    
-    print("Classification Report:\n", report)
-    
-    # Setting the parameter grids
-    param_grid = {
-        'n_estimators': [50, 100, 150],
-        'max_depth': [None, 10, 20],
-        'min_samples_leaf': [1, 2, 4]
-    }
-    
-    classifier = RandomForestClassifier()
-    
-    grid_search = GridSearchCV(classifier, param_grid, cv=5)
-    grid_search.fit(X_train_scaled, y_train)
-    
-    best_params = grid_search.best_params_
-    best_model = grid_search.best_estimator_
-    
-    print(best_params)
-    print(best_model)
-    
-    best_model = grid_search.best_estimator_
-    y_pred_best = best_model.predict(X_test_scaled)
-    
-    report_best = classification_report(y_test, y_pred_best, target_names=iris.target_names)
-    print("Best Model Classification Report:\n", report_best)
-    
-    #Visualisation
-    
-    # Create a scatter plot
-    plt.figure(figsize=(8, 6))
-    
-    for target, target_name in enumerate(iris.target_names):
-        plt.scatter(X[y == target, 0], X[y == target, 1], label=target_name)
-    
-    plt.xlabel('Sepal Length (cm)')
-    plt.ylabel('Sepal Width (cm)')
-    plt.title('Scatter Plot of Iris Dataset')
-    plt.legend()
-    
-    plt.show()
-    ```
-    
-
 # Author
 
 [Arjith Praison](https://www.linkedin.com/in/arjith-praison-95b145184/)
 
-University of Siegen
+University of Siegen,
 Germany
